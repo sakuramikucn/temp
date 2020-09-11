@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 public class ClientConfig {
 
     public VmClient getClient(){
-        String accessKeyId = "413DB6F3EBC59B0297E761E7104FE3A0";
-        String secretAccessKey = "BC87E4EFF05EC92DF8E162CF558785E9";
+        String accessKeyId = "413DB6F3EBC59B0297E76166666666A0";
+        String secretAccessKey = "BC87E4EFF666666668E162CF558785E9";
         CredentialsProvider credentialsProvider = new StaticCredentialsProvider(accessKeyId, secretAccessKey);
 
         //2. 创建XXXClient
