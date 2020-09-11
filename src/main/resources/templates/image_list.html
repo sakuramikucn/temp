@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>镜像列表</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>镜像ID</th>
+            <th>镜像名称</th>
+            <th>操作系统发行版</th>
+            <th>操作系统版本</th>
+            <th>镜像架构</th>
+            <th>系统盘大小</th>
+            <th>镜像来源</th>
+            <th>操作系统类型</th>
+            <th>镜像状态</th>
+            <th>创建时间</th>
+            <th>镜像描述</th>
+            <th>创建云盘系统盘所使用的云硬盘快照ID</th>
+            <th>镜像支持的系统盘类型</th>
+            <th>镜像复制和转换时的进度</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="image :${imageList}" style="text-align: center">
+            <td th:text="${image.getImageId()}"></td>
+            <td th:text="${image.getName()}"></td>
+            <td th:text="${image.getPlatform()}"></td>
+            <td th:text="${image.getOsVersion()}"></td>
+            <td th:text="${image.getArchitecture()}"></td>
+            <td th:text="${image.getSystemDiskSizeGB()}"></td>
+            <td th:text="${image.getImageSource()}"></td>
+            <td th:text="${image.getOsType()}"></td>
+            <td th:text="${image.getStatus()}"></td>
+            <td th:text="${image.getCreateTime()}"></td>
+            <td th:text="${image.getDesc()}"></td>
+            <td th:text="${image.getSnapshotId()}"></td>
+            <td th:text="${image.getRootDeviceType()}"></td>
+            <td th:text="${image.getProgress()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sakuramiku.demojdcloud.dao.ImageMapper">
+
+
+  <resultMap id="BaseResultMap" type="cn.sakuramiku.demojdcloud.model.ImageVo">
+    <result column="image_id" jdbcType="VARCHAR" property="imageId" />
+    <result column="image_name" jdbcType="VARCHAR" property="name" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="os_version" jdbcType="VARCHAR" property="osVersion" />
+    <result column="architecture" jdbcType="VARCHAR" property="architecture" />
+    <result column="system_disk_size_gb" jdbcType="INTEGER" property="systemDiskSizeGB" />
+    <result column="image_source" jdbcType="VARCHAR" property="imageSource" />
+    <result column="os_type" jdbcType="VARCHAR" property="osType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="snapshot_id" jdbcType="VARCHAR" property="snapshotId" />
+    <result column="root_device_type" jdbcType="VARCHAR" property="rootDeviceType" />
+    <result column="progress" jdbcType="VARCHAR" property="progress" />
+  </resultMap>
+
+  <sql id="baseSql" >
+      image_id, image_name, platform,
+      os_version, architecture, system_disk_size_gb,
+      image_source, os_type, `status`,
+      create_time, `desc`, snapshot_id,
+      root_device_type, progress
+  </sql>
+
+  <insert id="saveBatchImages" parameterType="list">
+    insert into tb_image(
+      <include refid="baseSql"/>)
+    values
+      <foreach collection="imageVos" separator="," index="index" item="imagevo">
+      <trim prefix="(" suffixOverrides="," suffix=")">
+          #{imagevo.imageId,jdbcType=VARCHAR},
+          #{imagevo.name,jdbcType=VARCHAR},
+          #{imagevo.platform,jdbcType=VARCHAR},
+          #{imagevo.osVersion,jdbcType=VARCHAR},
+          #{imagevo.architecture,jdbcType=VARCHAR},
+          #{imagevo.systemDiskSizeGB,jdbcType=INTEGER},
+          #{imagevo.imageSource,jdbcType=VARCHAR},
+          #{imagevo.osType,jdbcType=VARCHAR},
+          #{imagevo.status,jdbcType=VARCHAR},
+          #{imagevo.createTime,jdbcType=VARCHAR},
+          #{imagevo.desc,jdbcType=VARCHAR},
+          #{imagevo.snapshotId,jdbcType=VARCHAR},
+          #{imagevo.rootDeviceType,jdbcType=VARCHAR},
+          #{imagevo.progress,jdbcType=VARCHAR},
+      </trim>
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+      image_name = values(image_name),
+      platform = values(platform),
+      os_version = values(os_version),
+      architecture = values(architecture),
+      system_disk_size_gb = values(system_disk_size_gb),
+      image_source =  values(image_source),
+      os_type = values(os_type),
+      `status` =  values(`status`),
+      create_time = values(create_time),
+      `desc` = values(`desc`),
+      snapshot_id= values(snapshot_id),
+      root_device_type = values(root_device_type),
+      progress = values(progress)
+  </insert>
+
+</mapper>
